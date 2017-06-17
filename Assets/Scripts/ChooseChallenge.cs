@@ -65,50 +65,57 @@ public class ChooseChallenge : MonoBehaviour {
             var n = JSON.Parse(text);
 
             List<Puzzles> puzzles = new List<Puzzles>();
+            string area = "";
             switch (m)
             {
                 case Mode.publicA:
-                    for (int i = 0; i < n["publicArea"].Count; i++) {
-                        Puzzles puzzle = new Puzzles(n["publicArea"][i]["type"].Value);
-                        puzzle.title = n["publicArea"][i]["title"].Value;
-                        puzzle.points = n["publicArea"][i]["points"].AsInt;
-                        puzzle.description = n["publicArea"][i]["description"].Value;
-                        puzzle.beaconID = -1;
-                        puzzle.correctAnswer = -1;
-
-                        switch (puzzle.type)
-                        {
-                            case "find":
-                                puzzle.url = n["publicArea"][i]["image"].Value;
-                                puzzle.beaconID = n["publicArea"][i]["beaconID"].AsInt;
-                                break;
-                            case "question":
-                                puzzle.correctAnswer = n["publicArea"][i]["correctAnswer"].AsInt;
-                                for(int j = 0; j< n["publicArea"][i]["answers"].Count; j++)
-                                {
-                                    puzzle.answers.Add(n["publicArea"][i]["answers"][j]["text"].Value);
-                                }
-                                
-                                break;
-                            case "quest":
-                                break;
-                            default:
-                                break;
-                        }
-
-                        puzzles.Add(puzzle);
-                    }
+                    area = "publicArea";
                     break;
                 case Mode.passenger:
+                    area = "passengerZone";
                     break;
                 case Mode.security:
+                    area = "securityCheck";
                     break;
                 default:
                     Debug.LogError("Wrong Mode");
                     break;
             }
 
-            foreach(Puzzles p in puzzles)
+            for (int i = 0; i < n[area].Count; i++)
+            {
+                Puzzles puzzle = new Puzzles(n[area][i]["type"].Value);
+                puzzle.title = n[area][i]["title"].Value;
+                puzzle.points = n[area][i]["points"].AsInt;
+                puzzle.description = n[area][i]["description"].Value;
+                puzzle.beaconID = -1;
+                puzzle.correctAnswer = -1;
+
+                switch (puzzle.type)
+                {
+                    case "find":
+                        puzzle.url = n[area][i]["image"].Value;
+                        puzzle.beaconID = n[area][i]["beaconID"].AsInt;
+                        break;
+                    case "question":
+                        puzzle.correctAnswer = n[area][i]["correctAnswer"].AsInt;
+                        for (int j = 0; j < n[area][i]["answers"].Count; j++)
+                        {
+                            puzzle.answers.Add(n[area][i]["answers"][j]["text"].Value);
+                        }
+
+                        break;
+                    case "quest":
+                        break;
+                    default:
+                        break;
+                }
+
+                puzzles.Add(puzzle);
+            }
+
+
+            foreach (Puzzles p in puzzles)
             {
                 p.printString();
             }
