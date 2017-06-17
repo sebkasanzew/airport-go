@@ -15,7 +15,7 @@ public class ApplicationManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         lastInfo = Input.location.lastData;
-        Debug.Log(lastInfo.latitude + " " + lastInfo.longitude);
+        //Debug.Log(lastInfo.latitude + " " + lastInfo.longitude);
     }
 
     IEnumerator StartLocationService()
