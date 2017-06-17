@@ -12,6 +12,7 @@ public class PuzzleListElement : MonoBehaviour {
 
     private int id;
     private ChallengeContoller cc;
+    public Puzzles puzzle;
 
     public void Initialize(Puzzles p, int i, ChallengeContoller cc)
     {
@@ -19,6 +20,7 @@ public class PuzzleListElement : MonoBehaviour {
         this.cc = cc;
         icon.sprite = iconSprites[GetSpriteID(p.type)];
         title.text = p.title;
+        puzzle = p;
         gameObject.GetComponent<Button>().onClick.AddListener(OnClick);
     }
 

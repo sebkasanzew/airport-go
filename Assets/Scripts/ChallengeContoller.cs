@@ -26,5 +26,6 @@ public class ChallengeContoller : MonoBehaviour {
     public void OnClickListElement(int id)
     {
         PuzzleDetailView.SetActive(true);
+        PuzzleDetailView.GetComponent<PuzzleController>().Initialize(puzzleList[id]);
     }
 }
