@@ -52,4 +52,9 @@ public class PuzzleListElement : MonoBehaviour {
     {
         cc.OnClickListElement(id);
     }
+
+    public void IsSolved()
+    {
+        gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+    }
 }
