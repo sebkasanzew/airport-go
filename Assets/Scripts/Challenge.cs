@@ -17,6 +17,7 @@ public class Challenge
 public class Puzzles
 {
     public string type;
+    public string title;
     public int points;
     public string description;
     public string url;
@@ -35,7 +36,9 @@ public class Puzzles
         string debugURL = url != null? url : "";
         string debugBeacon = beaconID > 0 ? beaconID.ToString() : "";
         string debugCorrectAnswer = correctAnswer >= 0 ? correctAnswer.ToString() : "";
-        Debug.Log(type 
+        Debug.Log(type
+            + " "
+            + title
             + " " 
             + points.ToString() 
             + " " 

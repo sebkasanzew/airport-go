@@ -6,6 +6,8 @@ using SimpleJSON;
 
 public class ChooseChallenge : MonoBehaviour {
 
+    public GameObject challenge;
+
     private enum Mode
     {
         publicA,
@@ -68,6 +70,7 @@ public class ChooseChallenge : MonoBehaviour {
                 case Mode.publicA:
                     for (int i = 0; i < n["publicArea"].Count; i++) {
                         Puzzles puzzle = new Puzzles(n["publicArea"][i]["type"].Value);
+                        puzzle.title = n["publicArea"][i]["title"].Value;
                         puzzle.points = n["publicArea"][i]["points"].AsInt;
                         puzzle.description = n["publicArea"][i]["description"].Value;
                         puzzle.beaconID = -1;
@@ -109,6 +112,9 @@ public class ChooseChallenge : MonoBehaviour {
             {
                 p.printString();
             }
+
+            challenge.SetActive(true);
+            challenge.GetComponent<ChallengeContoller>().Initialize(puzzles);
 
         }
     }
