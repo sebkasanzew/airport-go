@@ -7,11 +7,13 @@ public class AnswerController : MonoBehaviour {
 
     public Text answer;
     public bool isCorrect;
+    private PuzzleController pz;
 
-    public void Initialize(string answer, bool isCorrect)
+    public void Initialize(string answer, bool isCorrect, PuzzleController pz)
     {
         this.answer.text = answer;
         this.isCorrect = isCorrect;
+        this.pz = pz;
         gameObject.GetComponent<Button>().onClick.AddListener(OnClick);
     }
 
@@ -19,11 +21,11 @@ public class AnswerController : MonoBehaviour {
     {
         if (isCorrect)
         {
-            //correct
+            pz.AnsweredCorrectly();
         }
         else
         {
-            //not correct
+            pz.AnsweredIncorrectly();
         }
     }
 }

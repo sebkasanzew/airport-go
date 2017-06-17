@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ApplicationManager : MonoBehaviour {
+public class ApplicationManager : Singleton<ApplicationManager>{
 
     bool gpsConnected = false;
     LocationInfo lastInfo;
 
+    public int points;
+
     // Use this for initialization
     void Start () {
+        points = 0;
         StartCoroutine(StartLocationService());
 	}
 	

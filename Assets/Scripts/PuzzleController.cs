@@ -36,9 +36,20 @@ public class PuzzleController : MonoBehaviour {
 
             for (int i = 0; i < ple.puzzle.answers.Count; i++)
             {
-                Instantiate(answerObject, answers.transform).GetComponent<AnswerController>().Initialize(ple.puzzle.answers[i], ple.puzzle.correctAnswer == i? true : false);
+                Instantiate(answerObject, answers.transform).GetComponent<AnswerController>().Initialize(ple.puzzle.answers[i], ple.puzzle.correctAnswer == i? true : false, this);
             }
         }
+    }
+
+    public void AnsweredCorrectly()
+    {
+        ApplicationManager.Instance.points += ple.currentPoints;
+        gameObject.SetActive(false);
+    }
+
+    public void AnsweredIncorrectly()
+    {
+        ple.currentPoints /= 2; 
     }
 
 }

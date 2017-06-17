@@ -14,6 +14,8 @@ public class PuzzleListElement : MonoBehaviour {
     private ChallengeContoller cc;
     public Puzzles puzzle;
 
+    public int currentPoints;
+
     public void Initialize(Puzzles p, int i, ChallengeContoller cc)
     {
         id = i;
@@ -21,6 +23,7 @@ public class PuzzleListElement : MonoBehaviour {
         icon.sprite = iconSprites[GetSpriteID(p.type)];
         title.text = p.title;
         puzzle = p;
+        currentPoints = p.points;
         gameObject.GetComponent<Button>().onClick.AddListener(OnClick);
     }
 
