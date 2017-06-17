@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ApplicationManager : Singleton<ApplicationManager>{
 
@@ -8,6 +9,8 @@ public class ApplicationManager : Singleton<ApplicationManager>{
     LocationInfo lastInfo;
 
     public int points;
+
+    public GameObject backButton;
 
     // Use this for initialization
     void Start () {
@@ -41,5 +44,18 @@ public class ApplicationManager : Singleton<ApplicationManager>{
         {
             gpsConnected = true;
         }
+    }
+
+    public void HideBackbutton()
+    {
+        backButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        backButton.SetActive(false);
+    }
+
+    public void AddListenerToBackButton(UnityEngine.Events.UnityAction action)
+    {
+        backButton.SetActive(true);
+        backButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        backButton.GetComponent<Button>().onClick.AddListener(action);
     }
 }

@@ -11,7 +11,7 @@ public class PuzzleListElement : MonoBehaviour {
     public Sprite[] iconSprites;
 
     private int id;
-    private ChallengeContoller cc;
+    public ChallengeContoller cc;
     public Puzzles puzzle;
 
     public int currentPoints;

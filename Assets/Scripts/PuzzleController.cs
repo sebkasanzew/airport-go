@@ -39,6 +39,8 @@ public class PuzzleController : MonoBehaviour {
                 Instantiate(answerObject, answers.transform).GetComponent<AnswerController>().Initialize(ple.puzzle.answers[i], ple.puzzle.correctAnswer == i? true : false, this);
             }
         }
+
+        ApplicationManager.Instance.AddListenerToBackButton(ClosePuzzleController);
     }
 
     public void AnsweredCorrectly()
@@ -54,4 +56,9 @@ public class PuzzleController : MonoBehaviour {
         ple.currentPoints /= 2; 
     }
 
+    public void ClosePuzzleController()
+    {
+        ple.cc.AddBackFunctionality();
+        gameObject.SetActive(false);
+    }
 }
