@@ -17,14 +17,37 @@ public class PuzzleController : MonoBehaviour {
 
     public GameObject successView;
 
+    public Sprite[] images;
+
     public void Initialize(PuzzleListElement ple)
     {
+
         this.ple = ple;
         title.text = ple.puzzle.title;
         description.text = ple.puzzle.description;
 
         if (ple.puzzle.type == "find") {
             image.SetActive(true);
+
+            Debug.Log(ple.puzzle.url);
+            int id = -1;
+            if (ple.puzzle.url == "49523")
+            {
+                 id = 0;
+            }
+            if (ple.puzzle.url == "49580")
+            {
+                 id = 1;
+            }
+            if (ple.puzzle.url == "49580")
+            {
+                 id = 2;
+            }
+            if (ple.puzzle.url == "50227")
+            {
+                 id = 3;
+            }
+            image.GetComponent<Image>().sprite = images[id];
             answers.SetActive(false);
             ApplicationManager.Instance.StartScanning();
         }
