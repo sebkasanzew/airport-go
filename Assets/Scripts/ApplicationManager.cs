@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using OMobile.EstimoteUnity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,8 @@ public class ApplicationManager : Singleton<ApplicationManager>{
 
     bool gpsConnected = false;
     LocationInfo lastInfo;
+
+    public EstimoteUnity _EstimoteUnity;
 
     public int points;
 
@@ -17,14 +20,34 @@ public class ApplicationManager : Singleton<ApplicationManager>{
 
     public GameObject solvedPuzzleObject;
 
+    public List<EstimoteUnityBeacon> beacons;
+
     // Use this for initialization
     void Start () {
         points = 0;
         StartCoroutine(StartLocationService());
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        _EstimoteUnity.OnDidRangeBeacons += HandleDidRangeBeacons;
+    }
+
+
+    public void StartScanning()
+    {
+        _EstimoteUnity.StartScanning();
+    }
+
+    public void StopScanning()
+    {
+        _EstimoteUnity.StopScanning();
+    }
+
+    private void HandleDidRangeBeacons(List<EstimoteUnityBeacon> beacons)
+    {
+        this.beacons = beacons;
+    }
+
+
+    // Update is called once per frame
+    void Update () {
         lastInfo = Input.location.lastData;
         //Debug.Log(lastInfo.latitude + " " + lastInfo.longitude);
     }

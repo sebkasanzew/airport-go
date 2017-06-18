@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using OMobile.EstimoteUnity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,7 @@ public class PuzzleController : MonoBehaviour {
         if (ple.puzzle.type == "find") {
             image.SetActive(true);
             answers.SetActive(false);
+            ApplicationManager.Instance.StartScanning();
         }
         else if (ple.puzzle.type == "question")
         {
@@ -43,6 +45,19 @@ public class PuzzleController : MonoBehaviour {
         ApplicationManager.Instance.AddListenerToBackButton(ClosePuzzleController);
     }
 
+    void Update()
+    {
+        if (ple.puzzle.type == "find")
+        {
+            foreach (EstimoteUnityBeacon b in ApplicationManager.Instance.beacons)
+            {
+                if (b.Major == ple.puzzle.beaconID && b.Accuracy < 1f) {
+                    AnsweredCorrectly();
+                }
+            }
+        }
+    }
+
     public void AnsweredCorrectly()
     {
         ApplicationManager.Instance.AddPoints(ple.currentPoints);
@@ -59,6 +74,7 @@ public class PuzzleController : MonoBehaviour {
 
     public void ClosePuzzleController()
     {
+        ApplicationManager.Instance.StopScanning();
         ple.cc.AddBackFunctionality();
         gameObject.SetActive(false);
     }
