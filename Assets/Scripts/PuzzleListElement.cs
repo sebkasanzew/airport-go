@@ -7,6 +7,7 @@ public class PuzzleListElement : MonoBehaviour {
 
     public Image icon;
     public Text title;
+    public GameObject check;
 
     public Sprite[] iconSprites;
 
@@ -25,6 +26,7 @@ public class PuzzleListElement : MonoBehaviour {
         puzzle = p;
         currentPoints = p.points;
         gameObject.GetComponent<Button>().onClick.AddListener(OnClick);
+        check.SetActive(false);
     }
 
     private int GetSpriteID(string t)
@@ -55,6 +57,7 @@ public class PuzzleListElement : MonoBehaviour {
 
     public void IsSolved()
     {
+        check.SetActive(true);
         gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
     }
 }
