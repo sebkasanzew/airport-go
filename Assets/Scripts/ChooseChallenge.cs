@@ -96,6 +96,9 @@ public class ChooseChallenge : MonoBehaviour {
                     case "find":
                         puzzle.url = n[area][i]["image"].Value;
                         puzzle.beaconID = n[area][i]["beaconID"].AsInt;
+                        puzzle.shopTitle = n[area][i]["rewardTitle"].Value;
+                        puzzle.shopDescription = n[area][i]["rewardText"].Value;
+                        puzzle.shopOpeningHours = n[area][i]["rewardOpeningHours"].Value;
                         break;
                     case "question":
                         puzzle.correctAnswer = n[area][i]["correctAnswer"].AsInt;
@@ -117,7 +120,7 @@ public class ChooseChallenge : MonoBehaviour {
 
             foreach (Puzzles p in puzzles)
             {
-                p.printString();
+                //p.printString();
             }
 
             challenge.SetActive(true);

@@ -24,6 +24,9 @@ public class Puzzles
     public int beaconID;
     public List<string> answers;
     public int correctAnswer;
+    public string shopTitle;
+    public string shopOpeningHours;
+    public string shopDescription;
 
     public Puzzles(string t)
     {

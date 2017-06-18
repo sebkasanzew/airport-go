@@ -15,6 +15,8 @@ public class PuzzleController : MonoBehaviour {
 
     public GameObject answerObject;
 
+    public GameObject successView;
+
     public void Initialize(PuzzleListElement ple)
     {
         this.ple = ple;
@@ -69,6 +71,8 @@ public class PuzzleController : MonoBehaviour {
         ple.IsSolved();
         gameObject.SetActive(false);
         Debug.Log("points: " + ApplicationManager.Instance.points);
+        successView.SetActive(true);
+        successView.GetComponent<SuccessScreenController>().Initialize(ple, ple.currentPoints);
     }
 
     public void AnsweredIncorrectly()
