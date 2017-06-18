@@ -45,7 +45,8 @@ public class PuzzleController : MonoBehaviour {
 
     public void AnsweredCorrectly()
     {
-        ApplicationManager.Instance.points += ple.currentPoints;
+        ApplicationManager.Instance.AddPoints(ple.currentPoints);
+        ApplicationManager.Instance.SolvePuzzle(ple.title.text, ple.currentPoints);
         ple.IsSolved();
         gameObject.SetActive(false);
         Debug.Log("points: " + ApplicationManager.Instance.points);

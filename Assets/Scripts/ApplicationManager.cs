@@ -11,6 +11,11 @@ public class ApplicationManager : Singleton<ApplicationManager>{
     public int points;
 
     public GameObject backButton;
+    public Text pointText;
+
+    public GameObject solvedList;
+
+    public GameObject solvedPuzzleObject;
 
     // Use this for initialization
     void Start () {
@@ -57,5 +62,16 @@ public class ApplicationManager : Singleton<ApplicationManager>{
         backButton.SetActive(true);
         backButton.GetComponent<Button>().onClick.RemoveAllListeners();
         backButton.GetComponent<Button>().onClick.AddListener(action);
+    }
+
+    public void AddPoints(int num)
+    {
+        points += num;
+        pointText.text = points.ToString();
+    }
+
+    public void SolvePuzzle(string title, int points)
+    {
+        Instantiate(solvedPuzzleObject, solvedList.transform).GetComponent<SolvedPuzzleController>().Initialize(title, points);
     }
 }
