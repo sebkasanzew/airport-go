@@ -49,10 +49,14 @@ public class PuzzleController : MonoBehaviour {
     {
         if (ple.puzzle.type == "find")
         {
-            foreach (EstimoteUnityBeacon b in ApplicationManager.Instance.beacons)
+            if (ApplicationManager.Instance.beacons != null)
             {
-                if (b.Major == ple.puzzle.beaconID && b.Accuracy < 1f) {
-                    AnsweredCorrectly();
+                foreach (EstimoteUnityBeacon b in ApplicationManager.Instance.beacons)
+                {
+                    if (b.Major == ple.puzzle.beaconID && b.Accuracy < 1f)
+                    {
+                        AnsweredCorrectly();
+                    }
                 }
             }
         }
